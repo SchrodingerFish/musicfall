@@ -1,0 +1,184 @@
+.playerBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: var(--player-bg);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 100;
+}
+
+.trackInfo {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  gap: 1rem;
+}
+
+.albumArt {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  background: var(--glass-bg);
+  overflow: hidden;
+  position: relative;
+}
+
+.albumArt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trackDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.trackName {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.artistName {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  gap: 0.5rem;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  color: var(--text-primary);
+}
+
+.playButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--background-start);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playButton:hover {
+  transform: scale(1.05);
+}
+
+.progressBarContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 4px;
+  background: var(--glass-border);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--accent-color);
+  border-radius: 2px;
+  position: relative;
+}
+
+.progressHandle {
+  width: 12px;
+  height: 12px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.progressTrack:hover .progressHandle {
+  opacity: 1;
+}
+
+.volumeContainer {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.volumeSlider {
+  width: 100px;
+  height: 4px;
+  background: var(--glass-border);
+  border-radius: 2px;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.qualitySelect {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  outline: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.qualitySelect option {
+  background: var(--background-start);
+  color: var(--text-primary);
+}
