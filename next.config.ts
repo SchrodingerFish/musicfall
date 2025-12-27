@@ -1,18 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  distDir: '.next',
-  
-  // 图片配置（静态导出必须）
+  output: 'export',  // 关键配置：启用静态导出
   images: {
-    unoptimized: true,
+    unoptimized: true,  // 必须禁用图片优化（Cloudflare Pages不支持）
   },
-  
-  // 开发时 sourcemap
-  productionBrowserSourceMaps: false,
-  
-  // 基础路径
-  basePath: '',
 };
 
 export default nextConfig;
