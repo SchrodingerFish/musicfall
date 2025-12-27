@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { LibraryProvider } from "@/context/LibraryContext";
 import { PlayerProvider } from "@/context/PlayerContext";
+import { SearchProvider } from "@/context/SearchContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -26,15 +27,17 @@ export default function RootLayout({
           <LanguageProvider>
             <LibraryProvider>
               <PlayerProvider>
-                <HistoryTracker />
-                <div className="app-container">
-                  <Sidebar />
-                  <main className="main-content">
-                    {children}
-                  </main>
-                  <FullScreenPlayer />
-                  <PlayerBar />
-                </div>
+                <SearchProvider>
+                  <HistoryTracker />
+                  <div className="app-container">
+                    <Sidebar />
+                    <main className="main-content">
+                      {children}
+                    </main>
+                    <FullScreenPlayer />
+                    <PlayerBar />
+                  </div>
+                </SearchProvider>
               </PlayerProvider>
             </LibraryProvider>
           </LanguageProvider>

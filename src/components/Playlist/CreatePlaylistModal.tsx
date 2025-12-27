@@ -29,43 +29,53 @@ export default function CreatePlaylistModal({ onClose }: CreatePlaylistModalProp
       display: 'flex', alignItems: 'center', justifyContent: 'center'
     }}>
       <div style={{
-        backgroundColor: '#1e1e1e', padding: '2rem', borderRadius: '12px',
-        width: '400px', maxWidth: '90vw',
-        border: '1px solid rgba(255,255,255,0.1)'
+        backgroundColor: 'var(--background-accent)', 
+        padding: '2rem', 
+        borderRadius: '12px',
+        width: '400px', 
+        maxWidth: '90vw',
+        border: '1px solid var(--glass-border)',
+        boxShadow: 'var(--glass-shadow)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{t('playlist.create')}</h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>{t('playlist.create')}</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>
             <X size={24} />
           </button>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem' }}>{t('playlist.name')}</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>{t('playlist.name')}</label>
             <input 
               type="text" 
               value={name} 
               onChange={e => setName(e.target.value)}
               style={{
                 width: '100%', padding: '0.8rem', borderRadius: '8px',
-                border: '1px solid rgba(255,255,255,0.1)',
-                background: 'rgba(255,255,255,0.05)', color: 'white'
+                border: '1px solid var(--glass-border)',
+                background: 'var(--glass-bg)', 
+                color: 'var(--text-primary)',
+                outline: 'none'
               }}
               required
             />
           </div>
           
           <div style={{ marginBottom: '1.5rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem' }}>{t('playlist.description')}</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>{t('playlist.description')}</label>
             <textarea 
               value={description} 
               onChange={e => setDescription(e.target.value)}
               style={{
                 width: '100%', padding: '0.8rem', borderRadius: '8px',
-                border: '1px solid rgba(255,255,255,0.1)',
-                background: 'rgba(255,255,255,0.05)', color: 'white',
-                minHeight: '80px'
+                border: '1px solid var(--glass-border)',
+                background: 'var(--glass-bg)', 
+                color: 'var(--text-primary)',
+                minHeight: '80px',
+                outline: 'none',
+                resize: 'vertical',
+                fontFamily: 'inherit'
               }}
             />
           </div>
@@ -77,21 +87,40 @@ export default function CreatePlaylistModal({ onClose }: CreatePlaylistModalProp
               style={{
                 padding: '0.8rem 1.5rem', borderRadius: '8px',
                 background: 'transparent',
-                border: '1px solid rgba(255,255,255,0.1)',
-                color: 'white', cursor: 'pointer'
+                border: '1px solid var(--glass-border)',
+                color: 'var(--text-primary)', 
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'var(--glass-bg)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
               }}
             >
-              Cancel
+              {t('common.cancel')}
             </button>
             <button 
               type="submit"
               disabled={!name.trim()}
               style={{
                 padding: '0.8rem 1.5rem', borderRadius: '8px',
-                background: '#4ec9b0',
+                background: 'var(--accent-color)',
                 border: 'none',
-                color: 'black', fontWeight: 'bold', cursor: 'pointer',
-                opacity: name.trim() ? 1 : 0.5
+                color: '#fff', 
+                fontWeight: 'bold', 
+                cursor: 'pointer',
+                opacity: name.trim() ? 1 : 0.5,
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                if (name.trim()) {
+                  e.currentTarget.style.background = 'var(--accent-hover)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'var(--accent-color)';
               }}
             >
               {t('playlist.create')}

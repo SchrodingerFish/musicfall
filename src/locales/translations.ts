@@ -51,6 +51,7 @@ export const translations = {
       songs: '歌曲',
       recentSongs: '最近播放',
       clear: '清空',
+      cancel: '取消',
     },
     playlist: {
       create: '创建歌单',
@@ -59,6 +60,7 @@ export const translations = {
       add: '添加',
       playAll: '播放全部',
       downloadAll: '下载全部',
+      downloading: '下载中...',
       nolist: '您还没有创建任何歌单，快去创建一个吧！',
     },
     theme: {
@@ -116,6 +118,7 @@ export const translations = {
       songs: 'songs',
       recentSongs: 'Recently played',
       clear: 'Clear',
+      cancel: 'Cancel',
     },
     playlist: {
       create: 'Create Playlist',
@@ -124,6 +127,7 @@ export const translations = {
       add: 'Add',
       playAll: 'Play All',
       downloadAll: 'Download All',
+      downloading: 'Downloading...',
       nolist: 'You haven\'t created any playlists yet, go create one!',
     },
     theme: {
@@ -141,7 +145,48 @@ export const translations = {
       favorites: '즐겨찾기',
       history: '재생 기록',
     },
-    // ...
+    home: {
+      title: 'MusicFall',
+      subtitle: '몰입형 음악 경험',
+      description: '고품질 오디오로 무한한 음악의 세계를 탐험하세요.',
+      startListening: '듣기 시작',
+    },
+    search: {
+      placeholder: '노래, 아티스트, 앨범 검색...',
+      button: '검색',
+      source: '출처',
+      results: '검색 결과',
+      noResults: '결과를 찾을 수 없습니다',
+      loading: '검색 중...',
+      selectSource: '음악 소스 선택',
+      tableHeaders: {
+        index: '#',
+        title: '제목',
+        artist: '아티스트',
+        album: '앨범',
+      },
+      addToQueue: '재생',
+    },
+    player: {
+      noTrack: '재생 중인 곡 없음',
+      selectSong: '곡을 선택하세요',
+      download: '다운로드',
+      quality: {
+        128: '표준',
+        192: '높음',
+        320: '매우 높음',
+        740: '무손실',
+        999: 'Hi-Res',
+      },
+    },
+    common: {
+      music: '음악',
+      loading: '로딩 중...',
+      songs: '곡',
+      recentSongs: '최근 재생',
+      clear: '지우기',
+      cancel: '취소',
+    },
     playlist: {
       create: '플레이리스트 만들기',
       name: '플레이리스트 이름',
@@ -149,6 +194,7 @@ export const translations = {
       add: '추가',
       playAll: '모두 재생',
       downloadAll: '모두 다운로드',
+      downloading: '다운로드 중...',
       nolist: '아직 플레이리스트를 만들지 않으셨네요! 지금 바로 만들어 보세요!',
     },
     theme: {
@@ -166,7 +212,48 @@ export const translations = {
       favorites: 'お気に入り',
       history: '再生履歴',
     },
-    // ...
+    home: {
+      title: 'MusicFall',
+      subtitle: '没入型音楽体験',
+      description: '高品質なオーディオで無限の音楽世界を探索しましょう。',
+      startListening: '聴き始める',
+    },
+    search: {
+      placeholder: '曲、アーティスト、アルバムを検索...',
+      button: '検索',
+      source: 'ソース',
+      results: '検索結果',
+      noResults: '結果が見つかりません',
+      loading: '検索中...',
+      selectSource: '音源を選択',
+      tableHeaders: {
+        index: '#',
+        title: 'タイトル',
+        artist: 'アーティスト',
+        album: 'アルバム',
+      },
+      addToQueue: '再生',
+    },
+    player: {
+      noTrack: '再生中の曲はありません',
+      selectSong: '曲を選択してください',
+      download: 'ダウンロード',
+      quality: {
+        128: '標準',
+        192: '高',
+        320: '最高',
+        740: 'ロスレス',
+        999: 'ハイレゾ',
+      },
+    },
+    common: {
+      music: '音楽',
+      loading: '読み込み中...',
+      songs: '曲',
+      recentSongs: '最近再生した曲',
+      clear: 'クリア',
+      cancel: 'キャンセル',
+    },
     playlist: {
       create: 'プレイリストを作成',
       name: 'プレイリスト名',
@@ -174,6 +261,7 @@ export const translations = {
       add: '追加',
       playAll: 'すべて再生',
       downloadAll: 'すべてダウンロード',
+      downloading: 'ダウンロード中...',
       nolist: 'まだプレイリストを作成していません。今すぐ作成しましょう！',
     },
     theme: {

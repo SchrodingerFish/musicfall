@@ -2,10 +2,11 @@
 
 import SongList from '@/components/SongList/SongList';
 import { useLanguage } from '@/context/LanguageContext';
+import { useSearch } from '@/context/SearchContext';
 import { musicApi } from '@/services/api';
-import { MusicSource, SearchResult } from '@/types/music';
+import { MusicSource } from '@/types/music';
 import { Loader2, Search as SearchIcon } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './search.module.css';
 
 const SOURCES: MusicSource[] = [
@@ -13,12 +14,19 @@ const SOURCES: MusicSource[] = [
 ] as any;
 
 export default function SearchPage() {
-  const [query, setQuery] = useState('');
-  const [source, setSource] = useState<MusicSource>('netease');
+  const { 
+    query, 
+    source, 
+    results, 
+    searched, 
+    loading,
+    setQuery, 
+    setSource, 
+    setResults, 
+    setSearched,
+    setLoading
+  } = useSearch();
   const { t } = useLanguage();
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
 
   const handleSearch = async (e?: React.FormEvent) => {
     e?.preventDefault();

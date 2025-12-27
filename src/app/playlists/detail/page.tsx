@@ -1,5 +1,6 @@
 "use client";
 
+import PlaylistCover from "@/components/Playlist/PlaylistCover";
 import SongList from "@/components/SongList/SongList";
 import { useLanguage } from "@/context/LanguageContext";
 import { useLibrary } from "@/context/LibraryContext";
@@ -48,29 +49,36 @@ function PlaylistDetailContent() {
     setDownloading(true);
     const zip = new JSZip();
     
-    // We limit to 5 concurrent downloads to avoid browser limits/rate limits
-    // Simple batching
-    
     let count = 0;
     const folder = zip.folder(playlist.name) || zip;
+    const BATCH_SIZE = 3; // Limit concurrent downloads
     
     try {
-        const promises = playlist.tracks.map(async (track) => {
-             // Basic fetch
-             try {
-                const { url } = await musicApi.getMusicUrl(track.id, track.source, quality);
-                if(url) {
-                    const response = await fetch(url);
-                    const blob = await response.blob();
-                    folder.file(`${track.name} - ${track.artist.join(',')}.mp3`, blob);
-                    count++;
-                }
-             } catch(e) {
-                 console.error(`Failed to download ${track.name}`, e);
-             }
-        });
-        
-        await Promise.all(promises);
+        // Splitting into batches
+        for (let i = 0; i < playlist.tracks.length; i += BATCH_SIZE) {
+            const batch = playlist.tracks.slice(i, i + BATCH_SIZE);
+            
+            await Promise.all(batch.map(async (track) => {
+                 try {
+                    const { url } = await musicApi.getMusicUrl(track.id, track.source, quality);
+                    if(url) {
+                        const response = await fetch(url);
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        const blob = await response.blob();
+                        // Sanitize filename
+                        const safeName = track.name.replace(/[\\/:*?"<>|]/g, '_');
+                        const safeArtist = track.artist.join(',').replace(/[\\/:*?"<>|]/g, '_');
+                        folder.file(`${safeName} - ${safeArtist}.mp3`, blob);
+                        count++;
+                    }
+                 } catch(e) {
+                     console.error(`Failed to download ${track.name}`, e);
+                 }
+            }));
+            
+            // Optional: small delay between batches to be nice to the API
+            await new Promise(resolve => setTimeout(resolve, 300));
+        }
         
         if (count > 0) {
             const content = await zip.generateAsync({ type: "blob" });
@@ -79,7 +87,7 @@ function PlaylistDetailContent() {
             link.download = `${playlist.name}.zip`;
             link.click();
         } else {
-            alert("None of the tracks could be downloaded.");
+            alert(t('playlist.nolist') || "No tracks downloaded"); // Fallback if translation missing context
         }
     } catch(err) {
         console.error("Batch download failed", err);
@@ -94,21 +102,19 @@ function PlaylistDetailContent() {
       <header style={{ display: 'flex', alignItems: 'flex-end', gap: '2rem', marginBottom: '2rem' }}>
         <div style={{ 
           width: 200, height: 200, 
-          background: 'linear-gradient(135deg, #10ac84, #1dd1a1)', 
           borderRadius: 16, 
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          overflow: 'hidden',
           boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+          background: 'var(--glass-bg)',
         }}>
-           <span style={{ fontSize: '4rem', fontWeight: 900, color: 'rgba(255,255,255,0.2)' }}>
-              {playlist.name.charAt(0).toUpperCase()}
-           </span>
+           <PlaylistCover playlist={playlist} />
         </div>
         
         <div style={{ flex: 1 }}>
-           <h4 style={{ textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px', opacity: 0.7 }}>{t('sidebar.playlists')}</h4>
-           <h1 style={{ fontSize: '3.5rem', fontWeight: 800, margin: '0.5rem 0' }}>{playlist.name}</h1>
-           <p style={{ opacity: 0.7, marginBottom: '1.5rem' }}>{playlist.description || "No description"}</p>
-           <p style={{ opacity: 0.7 }}>{playlist.tracks.length} {t('common.songs')}</p>
+           <h4 style={{ textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px', color: 'var(--text-secondary)' }}>{t('sidebar.playlists')}</h4>
+           <h1 style={{ fontSize: '3.5rem', fontWeight: 800, margin: '0.5rem 0', color: 'var(--text-primary)' }}>{playlist.name}</h1>
+           <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{playlist.description || t('playlist.description')}</p>
+           <p style={{ color: 'var(--text-secondary)' }}>{playlist.tracks.length} {t('common.songs')}</p>
            
            <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
               <button 
@@ -116,13 +122,16 @@ function PlaylistDetailContent() {
                 disabled={playlist.tracks.length === 0}
                 style={{ 
                     padding: '0.8rem 2rem', borderRadius: '999px',
-                    background: '#4ec9b0', border: 'none', color: 'black',
+                    background: 'var(--accent-color)', border: 'none', color: '#fff',
                     fontWeight: 'bold', fontSize: '1.1rem', cursor: 'pointer',
                     display: 'flex', alignItems: 'center', gap: '0.5rem',
-                    opacity: playlist.tracks.length === 0 ? 0.5 : 1
+                    opacity: playlist.tracks.length === 0 ? 0.5 : 1,
+                    transition: 'all 0.2s'
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--accent-hover)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'var(--accent-color)'}
               >
-                  <Play fill="black" size={20} />
+                  <Play fill="white" size={20} />
                   {t('playlist.playAll')}
               </button>
 
@@ -131,23 +140,29 @@ function PlaylistDetailContent() {
                 disabled={playlist.tracks.length === 0 || downloading}
                 style={{ 
                     padding: '0.8rem 1.5rem', borderRadius: '999px',
-                    background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)',
-                    color: 'white', cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', gap: '0.5rem'
+                    background: 'var(--glass-bg)', border: '1px solid var(--glass-border)',
+                    color: 'var(--text-primary)', cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', gap: '0.5rem',
+                    transition: 'all 0.2s'
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--glass-border)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'var(--glass-bg)'}
               >
                   <Download size={20} />
-                  {downloading ? 'Downloading...' : t('playlist.downloadAll')}
+                  {downloading ? t('playlist.downloading') : t('playlist.downloadAll')}
               </button>
 
               <button 
                 onClick={handleDelete}
                 style={{ 
                     padding: '0.8rem', borderRadius: '999px',
-                    background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)',
+                    background: 'var(--glass-bg)', border: '1px solid var(--glass-border)',
                     color: '#ff6b6b', cursor: 'pointer',
-                    marginLeft: 'auto'
+                    marginLeft: 'auto',
+                    transition: 'all 0.2s'
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--glass-border)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'var(--glass-bg)'}
                 title="Delete Playlist"
               >
                   <Trash2 size={20} />

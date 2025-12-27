@@ -4,13 +4,24 @@ const API_BASE_URL = 'https://music-api.gdstudio.xyz/api.php';
 
 async function fetchAPI<T>(params: Record<string, string | number>): Promise<T> {
   const url = new URL(API_BASE_URL);
-  Object.keys(params).forEach(key => url.searchParams.append(key, String(params[key])));
+  Object.keys(params).forEach(key => {
+    if (params[key] !== undefined && params[key] !== null) {
+      url.searchParams.append(key, String(params[key]));
+    }
+  });
   
-  const response = await fetch(url.toString());
-  if (!response.ok) {
-    throw new Error(`API call failed: ${response.statusText}`);
+  try {
+    const response = await fetch(url.toString());
+    if (!response.ok) {
+       // Log error but allow caller to handle it
+       console.warn(`API Error: ${response.status} ${response.statusText}`);
+       throw new Error(`API call failed: ${response.status}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error("Fetch error:", error);
+    throw error;
   }
-  return response.json();
 }
 
 export const musicApi = {
