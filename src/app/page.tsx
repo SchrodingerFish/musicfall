@@ -20,23 +20,24 @@ export default function Home() {
       <div style={{ 
         width: '120px', 
         height: '120px', 
-        background: 'rgba(255,255,255,0.1)', 
+        background: 'var(--glass-bg)', 
         borderRadius: '50%', 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'center',
         marginBottom: '2rem',
         backdropFilter: 'blur(20px)',
-        boxShadow: '0 0 40px rgba(0,0,0,0.2)'
+        border: '1px solid var(--glass-border)',
+        boxShadow: 'var(--glass-shadow)'
       }}>
-        <Music size={60} color="#fff" />
+        <Music size={60} style={{ color: 'var(--text-primary)' }} />
       </div>
       
       <h1 style={{ 
         fontSize: '4rem', 
         fontWeight: '800', 
         marginBottom: '1rem',
-        background: 'linear-gradient(to right, #fff, #ff0055)',
+        background: 'linear-gradient(to right, var(--text-primary), var(--accent-color))',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent'
       }}>
@@ -45,7 +46,7 @@ export default function Home() {
       
       <p style={{ 
         fontSize: '1.2rem', 
-        color: 'rgba(255,255,255,0.6)', 
+        color: 'var(--text-secondary)', 
         marginBottom: '3rem',
         maxWidth: '500px'
       }}>
@@ -56,16 +57,26 @@ export default function Home() {
         href="/search"
         style={{
           padding: '1rem 2.5rem',
-          background: '#fff',
-          color: '#000',
+          background: 'var(--accent-color)',
+          color: '#fff',
           borderRadius: '50px',
           fontWeight: 'bold',
           fontSize: '1.1rem',
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
-          transition: 'transform 0.2s',
-          boxShadow: '0 10px 30px rgba(255, 255, 255, 0.2)'
+          transition: 'all 0.2s',
+          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+          border: 'none',
+          cursor: 'pointer'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'var(--accent-hover)';
+          e.currentTarget.style.transform = 'scale(1.05)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'var(--accent-color)';
+          e.currentTarget.style.transform = 'scale(1)';
         }}
       >
         {t('home.startListening')} <ArrowRight size={20} />

@@ -8,7 +8,7 @@
   font-size: 2.5rem;
   margin-bottom: 2rem;
   font-weight: 700;
-  background: linear-gradient(to right, #fff, #a5b4fc);
+  background: linear-gradient(to right, var(--text-primary), var(--accent-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -75,17 +75,19 @@
 }
 
 .select option {
-  background: #1e1b4b; /* dark bg for dropdown */
+  background: var(--background-start);
+  color: var(--text-primary);
 }
 
 .button {
   width: 100px;
-  background: var(--text-primary);
+  background: var(--accent-color);
+  color: #fff;
   border: none;
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,7 +95,7 @@
 
 .button:hover {
   transform: scale(1.02);
-  background: #e0e0e0;
+  background: var(--accent-hover);
 }
 
 .spin {
