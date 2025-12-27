@@ -7,18 +7,24 @@ import { usePlayer } from "@/context/PlayerContext";
 import { musicApi } from "@/services/api";
 import JSZip from 'jszip';
 import { Download, Play, Trash2 } from "lucide-react";
-import { useParams, useRouter } from 'next/navigation';
-import { useState } from "react";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useState } from "react";
 
-export default function PlaylistDetailPage() {
-  const { id } = useParams() as { id: string };
+function PlaylistDetailContent() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
   const { getPlaylist, deletePlaylist } = useLibrary();
   const { playQueue, quality } = usePlayer();
   const { t } = useLanguage();
   const router = useRouter();
 
-  const playlist = getPlaylist(id);
   const [downloading, setDownloading] = useState(false);
+
+  if (!id) {
+    return <div style={{ padding: '2rem' }}>Invalid playlist ID</div>;
+  }
+
+  const playlist = getPlaylist(id);
 
   if (!playlist) {
     return <div style={{ padding: '2rem' }}>Playlist not found</div>;
@@ -152,5 +158,13 @@ export default function PlaylistDetailPage() {
 
       <SongList songs={playlist.tracks} />
     </div>
+  );
+}
+
+export default function PlaylistDetailPage() {
+  return (
+    <Suspense fallback={<div style={{ padding: '2rem' }}>Loading...</div>}>
+      <PlaylistDetailContent />
+    </Suspense>
   );
 }

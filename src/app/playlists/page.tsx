@@ -36,7 +36,7 @@ export default function PlaylistsPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '2rem' }}>
         {playlists.map(playlist => (
-          <Link key={playlist.id} href={`/playlists/${playlist.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link key={playlist.id} href={`/playlists/detail?id=${playlist.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div style={{ 
               background: 'rgba(255,255,255,0.03)', 
               borderRadius: '12px', 
