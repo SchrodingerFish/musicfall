@@ -2,7 +2,7 @@
  "name": "musicfall",
   "compatibility_date": "2025-12-26",
   "assets": {
-    "directory": "out"
+    "directory": ".next"
   },
   "observability": {
     "enabled": false,
