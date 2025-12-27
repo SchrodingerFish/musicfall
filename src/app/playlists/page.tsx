@@ -73,7 +73,7 @@ export default function PlaylistsPage() {
 
       {playlists.length === 0 && (
          <div style={{ textAlign: 'center', padding: '4rem', opacity: 0.5 }}>
-           <p>No playlists created yet</p>
+           <p>{t('playlist.nolist')}</p>
          </div>
       )}
 
