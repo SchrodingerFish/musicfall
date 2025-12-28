@@ -2,6 +2,7 @@ import FullScreenPlayer from "@/components/FullScreenPlayer/FullScreenPlayer";
 import HistoryTracker from "@/components/HistoryTracker";
 import PlayerBar from "@/components/PlayerBar/PlayerBar";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import TopControls from "@/components/TopControls/TopControls";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { LibraryProvider } from "@/context/LibraryContext";
 import { PlayerProvider } from "@/context/PlayerContext";
@@ -29,6 +30,7 @@ export default function RootLayout({
               <PlayerProvider>
                 <SearchProvider>
                   <HistoryTracker />
+                  <TopControls />
                   <div className="app-container">
                     <Sidebar />
                     <main className="main-content">

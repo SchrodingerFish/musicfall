@@ -16,17 +16,18 @@
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;
-    height: 60px; /* Standard Bottom Nav Height */
+    height: calc(60px + var(--safe-area-bottom));
     flex-direction: row;
     padding: 0 1rem;
     padding-bottom: var(--safe-area-bottom);
-    height: calc(60px + var(--safe-area-bottom));
     top: auto;
     bottom: 0;
     border-right: none;
     border-top: 1px solid var(--glass-border);
     justify-content: space-around;
-    background: rgba(18, 18, 18, 0.95); /* Darker bg for mobile nav */
+    background: rgba(15, 12, 41, 0.95); /* Match theme start color with opacity */
+    backdrop-filter: blur(20px);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -41,18 +42,11 @@
 }
 
 @media (max-width: 768px) {
-  .logo, .footer {
+  .logo {
     display: none;
   }
 }
 
-.footer {
-  margin-top: auto;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
 
 .nav {
   display: flex;
@@ -85,11 +79,17 @@
   .navItem {
     flex-direction: column;
     gap: 4px;
-    padding: 8px;
-    font-size: 0.7rem;
+    padding: 6px 4px;
+    font-size: 0.65rem;
     border-radius: 8px;
-    min-width: 60px;
+    min-width: 64px;
     justify-content: center;
+    background: transparent !important; /* Remove background on mobile to keep it clean */
+    box-shadow: none !important;
+  }
+  
+  .navItem.active {
+    color: var(--accent-color);
   }
 }
 

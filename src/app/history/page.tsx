@@ -10,10 +10,19 @@ export default function HistoryPage() {
   const { t } = useLanguage();
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ 
+    <div className="page-container" style={{ padding: 'var(--mobile-padding, 2rem)' }}>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .page-container { padding: 1.5rem !important; }
+          .header { flex-direction: column; align-items: flex-start !important; gap: 1.5rem; }
+          .icon-box { width: 64px !important; height: 64px !important; margin-right: 0 !important; }
+          .title { font-size: 1.5rem !important; }
+          .title-section { flex-direction: column; align-items: flex-start !important; }
+        }
+      `}</style>
+      <header className="header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
+        <div className="title-section" style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="icon-box" style={{ 
             width: 80, height: 80, 
             background: 'linear-gradient(135deg, #54a0ff, #2e86de)', 
             borderRadius: 12, 

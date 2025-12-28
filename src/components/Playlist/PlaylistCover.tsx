@@ -68,16 +68,16 @@ export default function PlaylistCover({ playlist }: PlaylistCoverProps) {
   }
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: '8px', overflow: 'hidden' }}>
       <Image 
         src={coverUrl}
         alt={playlist.name}
         fill
-        sizes="(max-width: 768px) 160px, 200px"
+        sizes="(max-width: 768px) 140px, 200px"
+        priority={true}
         style={{ 
           objectFit: 'cover', 
-          borderRadius: '8px',
-          backgroundColor: 'var(--glass-bg)'
+          backgroundColor: 'var(--background-accent)'
         }}
         onError={() => setError(true)}
       />

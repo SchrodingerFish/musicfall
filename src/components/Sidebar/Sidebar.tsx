@@ -2,7 +2,7 @@
 
 import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
-import { Disc, Heart, History, Home, ListMusic, Monitor, Moon, Search, Sun } from 'lucide-react';
+import { Disc, Heart, History, Home, ListMusic, Search } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Sidebar.module.css';
@@ -44,41 +44,6 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <div className={styles.footer} style={{ marginTop: 'auto', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        
-        {/* Language Switcher */}
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-           <button onClick={() => setLanguage('zh')} style={{ opacity: language === 'zh' ? 1 : 0.5, cursor: 'pointer', background: 'none', border: 'none', color: 'var(--text-primary)' }}>中</button>
-           <button onClick={() => setLanguage('en')} style={{ opacity: language === 'en' ? 1 : 0.5, cursor: 'pointer', background: 'none', border: 'none', color: 'var(--text-primary)' }}>En</button>
-           <button onClick={() => setLanguage('ko')} style={{ opacity: language === 'ko' ? 1 : 0.5, cursor: 'pointer', background: 'none', border: 'none', color: 'var(--text-primary)' }}>한</button>
-           <button onClick={() => setLanguage('ja')} style={{ opacity: language === 'ja' ? 1 : 0.5, cursor: 'pointer', background: 'none', border: 'none', color: 'var(--text-primary)' }}>日</button>
-        </div>
-
-        {/* Theme Switcher */}
-        <div style={{ display: 'flex', gap: '8px', background: 'var(--glass-bg)', padding: '4px', borderRadius: '8px' }}>
-            <button 
-              onClick={() => setTheme('light')} 
-              title={t('theme.light')}
-              style={{ flex: 1, padding: '4px', border: 'none', background: theme === 'light' ? 'rgba(255,255,255,0.2)' : 'transparent', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center' }}
-            >
-              <Sun size={16} color="var(--text-primary)" />
-            </button>
-            <button 
-              onClick={() => setTheme('dark')} 
-              title={t('theme.dark')}
-              style={{ flex: 1, padding: '4px', border: 'none', background: theme === 'dark' ? 'rgba(255,255,255,0.2)' : 'transparent', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center' }}
-            >
-              <Moon size={16} color="var(--text-primary)" />
-            </button>
-            <button 
-              onClick={() => setTheme('system')} 
-              title={t('theme.system')}
-              style={{ flex: 1, padding: '4px', border: 'none', background: theme === 'system' ? 'rgba(255,255,255,0.2)' : 'transparent', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center' }}
-            >
-              <Monitor size={16} color="var(--text-primary)" />
-            </button>
-        </div>
-      </div>
     </aside>
   );
 }

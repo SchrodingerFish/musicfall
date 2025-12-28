@@ -103,6 +103,8 @@ a {
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
-    padding-bottom: calc(140px + var(--safe-area-bottom)); /* PlayerBar + BottomNav + SafeArea */
+    padding-top: 48px; /* Top Bar height */
+    padding-bottom: calc(60px + 60px + var(--safe-area-bottom) + 20px); /* PlayerBar (60) + BottomNav (60) + SafeArea + Extra space */
+    height: 100dvh;
   }
 }

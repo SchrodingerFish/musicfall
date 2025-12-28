@@ -16,6 +16,7 @@ interface LibraryContextType {
   addToPlaylist: (playlistId: string, track: SearchResult) => void;
   removeFromPlaylist: (playlistId: string, trackId: string) => void;
   getPlaylist: (id: string) => Playlist | undefined;
+  isLoaded: boolean;
 }
 
 const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
@@ -140,7 +141,8 @@ export const LibraryProvider = ({ children }: { children: ReactNode }) => {
       deletePlaylist,
       addToPlaylist,
       removeFromPlaylist,
-      getPlaylist
+      getPlaylist,
+      isLoaded
     }}>
       {children}
     </LibraryContext.Provider>

@@ -55,9 +55,7 @@ const nextConfig: NextConfig = {
       }
     ],
   },
-  devIndicators: {
-    buildActivity: false, // Hide the build indicator
-  },
+  devIndicators: false,
 };
 
 export default nextConfig;

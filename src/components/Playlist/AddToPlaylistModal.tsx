@@ -33,13 +33,14 @@ export default function AddToPlaylistModal({ onClose, track }: AddToPlaylistModa
       display: 'flex', alignItems: 'center', justifyContent: 'center'
     }}>
       <div style={{
-        backgroundColor: '#1e1e1e', padding: '2rem', borderRadius: '12px',
+        backgroundColor: 'var(--background-accent)', padding: '2rem', borderRadius: '12px',
         width: '400px', maxWidth: '90vw',
-        border: '1px solid rgba(255,255,255,0.1)'
+        border: '1px solid var(--glass-border)',
+        boxShadow: 'var(--glass-shadow)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Add to Playlist</h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>Add to Playlist</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}>
             <X size={24} />
           </button>
         </div>
@@ -56,8 +57,8 @@ export default function AddToPlaylistModal({ onClose, track }: AddToPlaylistModa
                   width: '100%', textAlign: 'left',
                   padding: '1rem', marginBottom: '0.5rem',
                   borderRadius: '8px',
-                  background: 'rgba(255,255,255,0.05)',
-                  border: 'none', color: 'white',
+                  background: 'var(--glass-bg)',
+                  border: '1px solid var(--glass-border)', color: 'var(--text-primary)',
                   cursor: alreadyIn ? 'default' : 'pointer',
                   opacity: alreadyIn ? 0.5 : 1,
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center'
@@ -79,8 +80,8 @@ export default function AddToPlaylistModal({ onClose, track }: AddToPlaylistModa
           style={{
             width: '100%', padding: '0.8rem', borderRadius: '8px',
             background: 'transparent',
-            border: '1px dashed rgba(255,255,255,0.3)',
-            color: 'white', cursor: 'pointer',
+            border: '1px dashed var(--glass-border)',
+            color: 'var(--text-primary)', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'
           }}
         >

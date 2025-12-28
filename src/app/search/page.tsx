@@ -67,7 +67,9 @@ export default function SearchPage() {
           className={styles.select}
         >
           {SOURCES.map(s => (
-            <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>
+            <option key={s} value={s} style={{ background: 'var(--background-accent)', color: 'var(--text-primary)' }}>
+              {s.charAt(0).toUpperCase() + s.slice(1)}
+            </option>
           ))}
         </select>
 

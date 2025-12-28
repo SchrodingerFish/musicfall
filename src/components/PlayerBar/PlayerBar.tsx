@@ -93,11 +93,11 @@ export default function PlayerBar() {
           className={styles.qualitySelect}
           disabled={!currentTrack}
         >
-          <option value={128}>128k {t('player.quality.128')}</option>
-          <option value={192}>192k {t('player.quality.192')}</option>
-          <option value={320}>320k {t('player.quality.320')}</option>
-          <option value={740}>SQ {t('player.quality.740')}</option>
-          <option value={999}>Lossless {t('player.quality.999')}</option>
+          <option value={128} style={{ background: 'var(--background-accent)', color: 'var(--text-primary)' }}>128k {t('player.quality.128')}</option>
+          <option value={192} style={{ background: 'var(--background-accent)', color: 'var(--text-primary)' }}>192k {t('player.quality.192')}</option>
+          <option value={320} style={{ background: 'var(--background-accent)', color: 'var(--text-primary)' }}>320k {t('player.quality.320')}</option>
+          <option value={740} style={{ background: 'var(--background-accent)', color: 'var(--text-primary)' }}>SQ {t('player.quality.740')}</option>
+          <option value={999} style={{ background: 'var(--background-accent)', color: 'var(--text-primary)' }}>Lossless {t('player.quality.999')}</option>
         </select>
         <Volume2 size={20} color="var(--text-secondary)" />
         <input 

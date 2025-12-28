@@ -49,6 +49,7 @@ export default function SongList({ songs, playlistId }: SongListProps) {
             </span>
             <div className={styles.titleCol}>
               <span className={styles.songName}>{song.name}</span>
+              <span className={styles.mobileArtist}>{song.artist.join(', ')}</span>
             </div>
             <span className={styles.artist}>{song.artist.join(', ')}</span>
             <span className={styles.album}>{song.album}</span>

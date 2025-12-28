@@ -15,6 +15,16 @@
   color: var(--text-primary);
 }
 
+.header {
+  padding-right: 180px;
+}
+
+@media (max-width: 768px) {
+  .header {
+     padding-right: 0;
+  }
+}
+
 .createButton {
   display: flex;
   align-items: center;
@@ -99,12 +109,12 @@
   }
   
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 
   .card {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .playlistName {

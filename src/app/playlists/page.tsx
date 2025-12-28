@@ -11,7 +11,7 @@ import { useState } from "react";
 import styles from './playlists.module.css';
 
 export default function PlaylistsPage() {
-  const { playlists } = useLibrary();
+  const { playlists, isLoaded } = useLibrary();
   const { t } = useLanguage();
   const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -42,7 +42,13 @@ export default function PlaylistsPage() {
         ))}
       </div>
 
-      {playlists.length === 0 && (
+      {!isLoaded && (
+        <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>
+          Loading...
+        </div>
+      )}
+
+      {isLoaded && playlists.length === 0 && (
          <div className={styles.emptyState}>
            <p className={styles.emptyText}>{t('playlist.nolist')}</p>
          </div>

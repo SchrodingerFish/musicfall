@@ -14,6 +14,7 @@
 .title {
   font-size: 2.5rem;
   margin-bottom: 2.5rem;
+  padding-right: 200px; /* Space for top-right controls */
   font-weight: 800;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-color) 100%);
@@ -25,7 +26,15 @@
 
 @media (max-width: 768px) {
   .title {
-    display: none;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    display: block; /* Show title on mobile but smaller */
   }
 }
 
@@ -40,12 +49,11 @@
 
 @media (max-width: 768px) {
   .searchBarContainer {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     height: auto;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
 }
 

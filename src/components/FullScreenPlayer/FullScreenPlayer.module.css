@@ -9,15 +9,23 @@
      Let's make it cover everything EXCEPT the bottom player bar, but maybe we can make it slide up from bottom overlaying everything.
   */
   top: 0;
-  height: calc(100vh - 90px); /* Leave space for player bar */
-  z-index: 90;
-  background: var(--background-start); /* Fallback */
+  height: 100dvh; /* Cover everything on mobile */
+  z-index: 150; /* Above regular UI and PlayerBar when expanded */
+  background: var(--background-start);
   background: linear-gradient(to bottom, #1e1b4b, #000);
   backdrop-filter: blur(50px);
   transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
   display: flex;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: 100dvh;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+  }
 }
 
 .visible {
@@ -32,6 +40,15 @@
   gap: 4rem;
 }
 
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+    padding-top: 4rem;
+  }
+}
+
 .leftSection {
   flex: 1;
   display: flex;
@@ -42,11 +59,20 @@
 
 .albumArt {
   width: 400px;
-  height: 400px;
+  max-width: 100%;
+  aspect-ratio: 1/1;
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   overflow: hidden;
   margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .albumArt {
+    width: 280px;
+    height: 280px;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .albumArt img {
@@ -59,26 +85,29 @@
   text-align: center;
 }
 
-.title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #fff;
-}
-
-.artist {
-  font-size: 1.2rem;
-  color: rgba(255,255,255,0.6);
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  .artist {
+    font-size: 1rem;
+  }
 }
 
 .rightSection {
-  flex: 1;
+  flex: 1.5;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent); /* Fade edges */
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+@media (max-width: 768px) {
+  .rightSection {
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  }
 }
 
 .lyricsContainer {
@@ -99,13 +128,27 @@
   transition: all 0.3s;
   cursor: pointer;
   font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .lyricLine {
+    font-size: 1.2rem;
+    padding: 0.6rem 0;
+  }
 }
 
 .activeLine {
   color: #fff;
   font-size: 1.8rem;
-  transform: scale(1.05); /* Slight pop */
-  transform-origin: left;
+  transform: scale(1.05);
+  transform-origin: center;
+}
+
+@media (max-width: 768px) {
+   .activeLine {
+     font-size: 1.4rem;
+   }
 }
 
 .closeButton {

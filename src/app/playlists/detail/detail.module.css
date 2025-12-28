@@ -40,6 +40,13 @@
   margin: 0.5rem 0;
   color: var(--text-primary);
   line-height: 1.1;
+  padding-right: 180px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    padding-right: 0;
+  }
 }
 
 .description {
@@ -123,8 +130,8 @@
 /* Mobile Adaptation */
 @media (max-width: 768px) {
   .container {
-    padding: 1rem;
-    padding-bottom: 140px;
+    padding: 1.5rem;
+    padding-bottom: calc(60px + 60px + var(--safe-area-bottom) + 40px);
   }
 
   .header {
