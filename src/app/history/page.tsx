@@ -14,13 +14,13 @@ export default function HistoryPage() {
       <style jsx>{`
         @media (max-width: 768px) {
           .page-container { padding: 1.5rem !important; }
-          .header { flex-direction: column; align-items: flex-start !important; gap: 1.5rem; }
+          .header { flex-direction: column; align-items: flex-start !important; gap: 1.5rem; padding-right: 0 !important; }
           .icon-box { width: 64px !important; height: 64px !important; margin-right: 0 !important; }
           .title { font-size: 1.5rem !important; }
           .title-section { flex-direction: column; align-items: flex-start !important; }
         }
       `}</style>
-      <header className="header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
+      <header className="header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', paddingRight: '180px' }}>
         <div className="title-section" style={{ display: 'flex', alignItems: 'center' }}>
           <div className="icon-box" style={{ 
             width: 80, height: 80, 
