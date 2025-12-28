@@ -5,17 +5,18 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useLibrary } from '@/context/LibraryContext';
 import { usePlayer } from '@/context/PlayerContext';
 import { SearchResult } from '@/types/music';
-import { Heart, Plus } from 'lucide-react';
+import { Heart, Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import styles from './SongList.module.css';
 
 interface SongListProps {
   songs: SearchResult[];
+  playlistId?: string;
 }
 
-export default function SongList({ songs }: SongListProps) {
+export default function SongList({ songs, playlistId }: SongListProps) {
   const { playTrack, currentTrack, isPlaying, togglePlay } = usePlayer();
-  const { toggleFavorite, isFavorite } = useLibrary(); // Assume we also want Favorite button?
+  const { toggleFavorite, isFavorite, removeFromPlaylist } = useLibrary(); // Assume we also want Favorite button?
   const { t } = useLanguage();
   const [trackToAdd, setTrackToAdd] = useState<SearchResult | null>(null);
 
@@ -67,6 +68,15 @@ export default function SongList({ songs }: SongListProps) {
                >
                  <Plus size={16} />
                </button>
+               {playlistId && (
+                 <button 
+                  onClick={() => removeFromPlaylist(playlistId, song.id)}
+                  className={styles.actionBtn}
+                  title={t('playlist.remove')}
+                 >
+                   <Trash2 size={16} />
+                 </button>
+               )}
             </div>
           </div>
         );

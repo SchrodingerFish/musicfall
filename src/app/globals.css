@@ -20,6 +20,9 @@
   
   --sidebar-bg: rgba(255, 255, 255, 0.02);
   --player-bg: rgba(18, 18, 18, 0.8);
+
+  /* Mobile Safe Area */
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 [data-theme='light'] {
@@ -95,4 +98,11 @@ a {
   height: 100vh;
   overflow-y: auto;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding-bottom: calc(140px + var(--safe-area-bottom)); /* PlayerBar + BottomNav + SafeArea */
+  }
 }

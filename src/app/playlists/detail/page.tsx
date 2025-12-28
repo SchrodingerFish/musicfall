@@ -10,6 +10,7 @@ import JSZip from 'jszip';
 import { Download, Play, Trash2 } from "lucide-react";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useState } from "react";
+import styles from './detail.module.css';
 
 function PlaylistDetailContent() {
   const searchParams = useSearchParams();
@@ -98,38 +99,23 @@ function PlaylistDetailContent() {
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <header style={{ display: 'flex', alignItems: 'flex-end', gap: '2rem', marginBottom: '2rem' }}>
-        <div style={{ 
-          width: 200, height: 200, 
-          borderRadius: 16, 
-          overflow: 'hidden',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-          background: 'var(--glass-bg)',
-        }}>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <div className={styles.coverWrapper}>
            <PlaylistCover playlist={playlist} />
         </div>
         
-        <div style={{ flex: 1 }}>
-           <h4 style={{ textTransform: 'uppercase', fontSize: '0.8rem', letterSpacing: '2px', color: 'var(--text-secondary)' }}>{t('sidebar.playlists')}</h4>
-           <h1 style={{ fontSize: '3.5rem', fontWeight: 800, margin: '0.5rem 0', color: 'var(--text-primary)' }}>{playlist.name}</h1>
-           <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{playlist.description || t('playlist.description')}</p>
-           <p style={{ color: 'var(--text-secondary)' }}>{playlist.tracks.length} {t('common.songs')}</p>
+        <div className={styles.content}>
+           <h4 className={styles.label}>{t('sidebar.playlists')}</h4>
+           <h1 className={styles.title}>{playlist.name}</h1>
+           <p className={styles.description}>{playlist.description || t('playlist.description')}</p>
+           <p className={styles.stats}>{playlist.tracks.length} {t('common.songs')}</p>
            
-           <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+           <div className={styles.actions}>
               <button 
                 onClick={handlePlayAll}
                 disabled={playlist.tracks.length === 0}
-                style={{ 
-                    padding: '0.8rem 2rem', borderRadius: '999px',
-                    background: 'var(--accent-color)', border: 'none', color: '#fff',
-                    fontWeight: 'bold', fontSize: '1.1rem', cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', gap: '0.5rem',
-                    opacity: playlist.tracks.length === 0 ? 0.5 : 1,
-                    transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--accent-hover)'}
-                onMouseLeave={(e) => e.currentTarget.style.background = 'var(--accent-color)'}
+                className={styles.playButton}
               >
                   <Play fill="white" size={20} />
                   {t('playlist.playAll')}
@@ -138,15 +124,7 @@ function PlaylistDetailContent() {
               <button 
                 onClick={handleDownloadAll}
                 disabled={playlist.tracks.length === 0 || downloading}
-                style={{ 
-                    padding: '0.8rem 1.5rem', borderRadius: '999px',
-                    background: 'var(--glass-bg)', border: '1px solid var(--glass-border)',
-                    color: 'var(--text-primary)', cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', gap: '0.5rem',
-                    transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--glass-border)'}
-                onMouseLeave={(e) => e.currentTarget.style.background = 'var(--glass-bg)'}
+                className={styles.actionButton}
               >
                   <Download size={20} />
                   {downloading ? t('playlist.downloading') : t('playlist.downloadAll')}
@@ -154,15 +132,7 @@ function PlaylistDetailContent() {
 
               <button 
                 onClick={handleDelete}
-                style={{ 
-                    padding: '0.8rem', borderRadius: '999px',
-                    background: 'var(--glass-bg)', border: '1px solid var(--glass-border)',
-                    color: '#ff6b6b', cursor: 'pointer',
-                    marginLeft: 'auto',
-                    transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--glass-border)'}
-                onMouseLeave={(e) => e.currentTarget.style.background = 'var(--glass-bg)'}
+                className={styles.deleteButton}
                 title="Delete Playlist"
               >
                   <Trash2 size={20} />
@@ -171,7 +141,7 @@ function PlaylistDetailContent() {
         </div>
       </header>
 
-      <SongList songs={playlist.tracks} />
+      <SongList songs={playlist.tracks} playlistId={id} />
     </div>
   );
 }

@@ -62,6 +62,7 @@ export const translations = {
       downloadAll: '下载全部',
       downloading: '下载中...',
       nolist: '您还没有创建任何歌单，快去创建一个吧！',
+      remove: '从歌单移除',
     },
     theme: {
       light: '浅色',
@@ -129,6 +130,7 @@ export const translations = {
       downloadAll: 'Download All',
       downloading: 'Downloading...',
       nolist: 'You haven\'t created any playlists yet, go create one!',
+      remove: 'Remove from Playlist',
     },
     theme: {
       light: 'Light',
@@ -196,6 +198,7 @@ export const translations = {
       downloadAll: '모두 다운로드',
       downloading: '다운로드 중...',
       nolist: '아직 플레이리스트를 만들지 않으셨네요! 지금 바로 만들어 보세요!',
+      remove: '플레이리스트에서 제거',
     },
     theme: {
       light: '라이트',
@@ -263,6 +266,7 @@ export const translations = {
       downloadAll: 'すべてダウンロード',
       downloading: 'ダウンロード中...',
       nolist: 'まだプレイリストを作成していません。今すぐ作成しましょう！',
+      remove: 'プレイリストから削除',
     },
     theme: {
       light: 'ライト',

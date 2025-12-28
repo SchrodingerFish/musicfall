@@ -51,7 +51,6 @@ export default function SearchPage() {
       
       <form onSubmit={handleSearch} className={styles.searchBarContainer}>
         <div className={styles.inputWrapper}>
-          <SearchIcon size={20} className={styles.searchIcon} />
           <input 
             type="text" 
             placeholder={t('search.placeholder')}
@@ -59,6 +58,7 @@ export default function SearchPage() {
             onChange={(e) => setQuery(e.target.value)}
             className={styles.input}
           />
+          <SearchIcon size={20} className={styles.searchIcon} />
         </div>
         
         <select 
@@ -79,14 +79,20 @@ export default function SearchPage() {
       <div className={styles.resultsArea}>
         {loading ? (
           <div className={styles.loadingState}>
-            <Loader2 className={styles.spin} size={32} />
+            <Loader2 className={styles.spin} size={40} />
+            <p>{t('search.placeholder')}...</p>
           </div>
         ) : (
           <>
             {results.length > 0 ? (
               <SongList songs={results} />
             ) : (
-              searched && <div className={styles.emptyState}>{t('search.noResults')}</div>
+              searched && (
+                <div className={styles.emptyState}>
+                  <SearchIcon size={64} className={styles.emptyIcon} />
+                  <p>{t('search.noResults')}</p>
+                </div>
+              )
             )}
           </>
         )}

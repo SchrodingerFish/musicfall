@@ -16,6 +16,24 @@
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .songRow {
+    grid-template-columns: 35px 1.5fr 1fr 70px; /* More space for Title vs Artist */
+    padding: 0.8rem 0.5rem;
+    gap: 0.5rem;
+  }
+  
+  /* Hide Album column (4th child in grid, index 5 if including index col? No, structure is: Index, Title, Artist, Album, Actions. So Album is 4th child) */
+  .songRow > *:nth-child(4) {
+    display: none; 
+  }
+
+  /* Adjust header text */
+  .songRow:first-child > *:nth-child(4) {
+    display: none;
+  }
+}
+
 .songRow:hover {
   background: rgba(255, 255, 255, 0.08);
 }

@@ -4,6 +4,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { musicApi } from '@/services/api';
 import { Playlist } from '@/types/music';
 import { Disc } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface PlaylistCoverProps {
@@ -15,20 +16,21 @@ export default function PlaylistCover({ playlist }: PlaylistCoverProps) {
   const [error, setError] = useState(false);
   const { t } = useLanguage();
 
-  useEffect(() => {
+    // Use the last added track for the cover
+    const latestTrack = playlist.tracks.length > 0 ? playlist.tracks[playlist.tracks.length - 1] : null;
+
+    useEffect(() => {
     let mounted = true;
 
     const fetchCover = async () => {
-      if (playlist.tracks.length === 0) {
-        setCoverUrl(null);
-        return;
+      // Reset state if no track
+      if (!latestTrack) {
+         if (mounted) setCoverUrl(null);
+         return;
       }
-
-      // 使用最近添加的歌曲（数组最后一个元素）
-      const latestTrack = playlist.tracks[playlist.tracks.length - 1];
       
       try {
-        // 使用 pic_id 获取封面。注意：API 需要 pic_id
+        // Fetch album art using pic_id
         const res = await musicApi.getAlbumArt(latestTrack.pic_id, latestTrack.source, 300);
         if (mounted && res?.url) {
           setCoverUrl(res.url);
@@ -47,9 +49,9 @@ export default function PlaylistCover({ playlist }: PlaylistCoverProps) {
     return () => {
       mounted = false;
     };
-  }, [playlist]); // 当 playlist 变化时（例如添加了新歌），重新获取
+  }, [latestTrack?.pic_id, latestTrack?.source]); // Depend on specific track ID/Source to prevent stale covers
 
-  if (playlist.tracks.length === 0 || error || !coverUrl) {
+  if (!playlist.tracks || playlist.tracks.length === 0 || error || !coverUrl) {
     return (
        <div style={{ 
         width: '100%', 
@@ -66,18 +68,19 @@ export default function PlaylistCover({ playlist }: PlaylistCoverProps) {
   }
 
   return (
-    <img 
-      src={coverUrl}
-      style={{ 
-        width: '100%', 
-        height: '100%', 
-        objectFit: 'cover', 
-        borderRadius: '8px',
-        backgroundColor: 'var(--glass-bg)'
-      }}
-      alt={playlist.name}
-      loading="lazy"
-      onError={() => setError(true)}
-    />
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <Image 
+        src={coverUrl}
+        alt={playlist.name}
+        fill
+        sizes="(max-width: 768px) 160px, 200px"
+        style={{ 
+          objectFit: 'cover', 
+          borderRadius: '8px',
+          backgroundColor: 'var(--glass-bg)'
+        }}
+        onError={() => setError(true)}
+      />
+    </div>
   );
 }

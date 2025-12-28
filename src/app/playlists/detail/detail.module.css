@@ -1,0 +1,155 @@
+.container {
+  padding: 2rem;
+  padding-bottom: 120px; /* Space for player bar */
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.coverWrapper {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: var(--glass-bg);
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+}
+
+.stats {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.playButton {
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  background: var(--accent-color);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.playButton:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+.playButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actionButton {
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.actionButton:hover:not(:disabled) {
+  background: var(--glass-border);
+}
+
+.deleteButton {
+  padding: 0.8rem;
+  border-radius: 999px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: #ff6b6b;
+  cursor: pointer;
+  margin-left: auto;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteButton:hover {
+  background: var(--glass-border);
+}
+
+/* Mobile Adaptation */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    padding-bottom: 140px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .coverWrapper {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .deleteButton {
+    margin-left: 0;
+  }
+}

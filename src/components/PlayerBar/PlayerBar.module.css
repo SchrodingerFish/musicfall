@@ -14,11 +14,34 @@
   z-index: 100;
 }
 
+@media (max-width: 768px) {
+  .playerBar {
+    bottom: calc(60px + var(--safe-area-bottom)); /* Above Bottom Nav */
+    height: 60px;
+    padding: 0 1rem;
+    background: rgba(30, 30, 30, 0.95); /* Better bg opacity */
+    border-top: none;
+    backdrop-filter: blur(12px);
+    z-index: 101; /* Above sidebar */
+  }
+}
+
 .trackInfo {
   display: flex;
   align-items: center;
   width: 30%;
   gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .trackInfo {
+    width: 60%;
+    background: rgba(30, 30, 30, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 4px;
+    margin-right: 1rem;
+  }
 }
 
 .albumArt {
@@ -28,6 +51,13 @@
   background: var(--glass-bg);
   overflow: hidden;
   position: relative;
+}
+
+@media (max-width: 768px) {
+  .albumArt {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .albumArt img {
@@ -53,6 +83,25 @@
   font-size: 0.85rem;
 }
 
+@media (max-width: 768px) {
+  .trackDetails {
+    flex: 1;
+    overflow: hidden;
+  }
+  .trackName {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .artistName {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 .controls {
   display: flex;
   flex-direction: column;
@@ -62,10 +111,32 @@
   gap: 0.5rem;
 }
 
+@media (max-width: 768px) {
+  .controls {
+    width: 40%;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  /* Hide progress bar and extra controls on mobile mini-player */
+  .progressBarContainer {
+    display: none;
+  }
+}
+
 .buttons {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .buttons {
+    gap: 0.5rem;
+  }
+  /* Show only play/pause and next on mobile */
+  .button:not(.playButton):not(:nth-child(3)) {
+    display: none;
+  }
 }
 
 .button {
@@ -148,12 +219,19 @@
   gap: 0.8rem;
 }
 
+@media (max-width: 768px) {
+  .volumeContainer {
+    display: none;
+  }
+}
+
 .volumeSlider {
   width: 100px;
   height: 4px;
   background: var(--glass-border);
   border-radius: 2px;
   -webkit-appearance: none;
+  appearance: none;
   outline: none;
 }
 
