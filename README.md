@@ -1,6 +1,14 @@
 # MusicFall - 沉浸式高品质音乐播放器
 
 MusicFall 是一个基于 **Next.js 15** 和 **React** 构建的现代 Web 音乐播放器。它采用极致的 **Glassmorphism (玻璃拟态)** 设计风格，旨在提供沉浸式的视觉体验和高品质的音频享受。
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+  <img src="screenshot/home.png" alt="home" style="width: 100%;"/>
+  <img src="screenshot/fullscreen.png" alt="fullscreen" style="width: 100%;"/>
+  <img src="screenshot/search.png" alt="search" style="width: 100%;"/>
+  <img src="screenshot/player_list.png" alt="player_list" style="width: 100%;"/>
+</div>
+
+
 
 ## ✨ 主要功能
 
